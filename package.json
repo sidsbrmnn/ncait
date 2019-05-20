@@ -1,0 +1,19 @@
+{
+  "name": "ncait",
+  "version": "1.0.0",
+  "description": "Website built using Node.js and Express for NCAIT 2019",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Siddharth Subramanian",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^3.0.1",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "nodemailer": "^5.1.1"
+  }
+}
