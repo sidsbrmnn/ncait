@@ -1,4 +1,3 @@
-const config = require('config');
 const express = require('express');
 const expbhs = require('express-handlebars');
 const nodemailer = require('nodemailer');
@@ -9,7 +8,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'sidsbrmnn@gmail.com',
-        pass: config.get('contactPass')
+        pass: ''
     }
 });
 
@@ -51,5 +50,5 @@ app.get('*', (req, res) => {
     res.render('404');
 });
 
-const port = process.env.PORT || config.get('port');
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
