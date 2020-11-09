@@ -8,12 +8,20 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'sidsbrmnn@gmail.com',
-        pass: ''
-    }
+        pass: '',
+    },
 });
 
-app.engine('handlebars', expbhs());
-app.set('view engine', 'handlebars');
+app.engine(
+    'hbs',
+    expbhs({
+        extname: 'hbs',
+        defaultLayout: 'default',
+        layoutsDir: __dirname + '/views/layouts/',
+        partialsDir: __dirname + '/views/partials/',
+    })
+);
+app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: false }));
@@ -37,17 +45,17 @@ app.post('/submit', (req, res) => {
 
 From
 ${req.body.name}
-${req.body.email}`
+${req.body.email}`,
         })
-        .then(success => res.send('Mail sent.'))
-        .catch(error => {
+        .then((success) => res.send('Mail sent.'))
+        .catch((error) => {
             console.log(error);
             res.send('Mail cannot be sent at the moment.');
         });
 });
 
 app.get('*', (req, res) => {
-    res.render('404');
+    res.render('404', { template: 'body-404' });
 });
 
 const port = process.env.PORT || 3000;
