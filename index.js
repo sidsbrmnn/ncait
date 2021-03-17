@@ -1,5 +1,8 @@
+const compression = require('compression');
 const express = require('express');
 const expbhs = require('express-handlebars');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const nodemailer = require('nodemailer');
 const path = require('path');
 
@@ -40,6 +43,13 @@ const transporter = nodemailer.createTransport({
 
 app.engine('handlebars', expbhs());
 app.set('view engine', 'handlebars');
+
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(helmet());
+    app.use(compression());
+}
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
